@@ -1,0 +1,353 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>green_functions &mdash; Anthropogenic Mw 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: blue" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Anthropogenic Mw
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../description.html">1. Methodology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">2. Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">3. SSSPy API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">4. References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: blue" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Anthropogenic Mw</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">green_functions</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for green_functions</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Green function in the time domain</span>
+<span class="sd">---------------------------------</span>
+
+<span class="sd">:copyright:</span>
+<span class="sd">    Jan Wiszniowski (jwisz@igf.edu.pl)</span>
+<span class="sd">:license:</span>
+<span class="sd">    GNU Lesser General Public License, Version 3</span>
+<span class="sd">    (https://www.gnu.org/copyleft/lesser.html)</span>
+<span class="sd">:version 0.0.1:</span>
+<span class="sd">    2025-02-07</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">SSSException</span>
+
+
+<div class="viewcode-block" id="BaseGreenFunction">
+<a class="viewcode-back" href="../api_lib.html#green_functions.BaseGreenFunction">[docs]</a>
+<span class="k">class</span> <span class="nc">BaseGreenFunction</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The base class of Green function classes. It required in derived classes definitions of three functions:</span>
+
+<span class="sd">    * near(self, source_model, distance, vp, vs, times)</span>
+<span class="sd">    * intermediate(self, source_model, distance, vp, vs, times)</span>
+<span class="sd">    * far(self, source_model, distance, vp, vs, times)</span>
+
+<span class="sd">    They return radial and transversal displacement responses.</span>
+
+<span class="sd">    :param dt: The time sampling step for integration and differentiation calculations,</span>
+<span class="sd">    :param density: The density at the source,</span>
+<span class="sd">    :param transversal_radiation: The transversal_radiation pattern in the far field,</span>
+<span class="sd">    :param radial_radiation: The radial radiation pattern in the far field.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">density</span><span class="p">,</span> <span class="n">transversal_radiation</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">radial_radiation</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">=</span> <span class="n">dt</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="n">density</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transversal_radiation</span> <span class="o">=</span> <span class="n">transversal_radiation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radial_radiation</span> <span class="o">=</span> <span class="n">radial_radiation</span>
+        <span class="k">pass</span>
+
+<div class="viewcode-block" id="BaseGreenFunction.near">
+<a class="viewcode-back" href="../api_lib.html#green_functions.BaseGreenFunction.near">[docs]</a>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">near</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_model</span><span class="p">,</span> <span class="n">distance</span><span class="p">,</span> <span class="n">vp</span><span class="p">,</span> <span class="n">vs</span><span class="p">,</span> <span class="n">times</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the near part of the displacement</span>
+
+<span class="sd">        :param source_model: The source model object,</span>
+<span class="sd">        :param distance: The hypocentral distance,</span>
+<span class="sd">        :param vp: The P wave velocity,</span>
+<span class="sd">        :param vs: The S wave velocity,</span>
+<span class="sd">        :param times: Time samples. The samples steps must equal dt,</span>
+<span class="sd">        :return: The radial and transversal displacement in the far field,</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="BaseGreenFunction.intermediate">
+<a class="viewcode-back" href="../api_lib.html#green_functions.BaseGreenFunction.intermediate">[docs]</a>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">intermediate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_model</span><span class="p">,</span> <span class="n">distance</span><span class="p">,</span> <span class="n">vp</span><span class="p">,</span> <span class="n">vs</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="n">phase</span><span class="o">=</span><span class="s1">&#39;P&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the intermediate part of the displacement</span>
+
+<span class="sd">        :param source_model: The source model object,</span>
+<span class="sd">        :param distance: The hypocentral distance,</span>
+<span class="sd">        :param vp: The P wave velocity,</span>
+<span class="sd">        :param vs: The S wave velocity,</span>
+<span class="sd">        :param times: Time samples. The samples steps must equal dt,</span>
+<span class="sd">        :param phase: The phase name: &#39;P&#39; or &#39;S&#39;,</span>
+<span class="sd">        :return: The radial and transversal displacement in the far field,</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="BaseGreenFunction.far">
+<a class="viewcode-back" href="../api_lib.html#green_functions.BaseGreenFunction.far">[docs]</a>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">far</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_model</span><span class="p">,</span> <span class="n">distance</span><span class="p">,</span> <span class="n">vp</span><span class="p">,</span> <span class="n">vs</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="n">phase</span><span class="o">=</span><span class="s1">&#39;P&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the far part of the displacement</span>
+
+<span class="sd">        :param source_model: The source model object,</span>
+<span class="sd">        :param distance: The hypocentral distance,</span>
+<span class="sd">        :param vp: The P wave velocity,</span>
+<span class="sd">        :param vs: The S wave velocity,</span>
+<span class="sd">        :param times: Time samples. The samples steps must equal dt,</span>
+<span class="sd">        :param phase: The phase name: &#39;P&#39; or &#39;S&#39;,</span>
+<span class="sd">        :return: The radial and transversal displacement in the far field,</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+</div>
+
+
+
+<span class="k">def</span> <span class="nf">_phases_function</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span> <span class="n">ts</span><span class="p">,</span> <span class="n">time</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">tp</span> <span class="o">&lt;=</span> <span class="n">time</span> <span class="o">&lt;=</span> <span class="n">ts</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">time</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">0.0</span>
+
+
+<div class="viewcode-block" id="HomogeneousGreenFunction">
+<a class="viewcode-back" href="../api_lib.html#green_functions.HomogeneousGreenFunction">[docs]</a>
+<span class="k">class</span> <span class="nc">HomogeneousGreenFunction</span><span class="p">(</span><span class="n">BaseGreenFunction</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The Green function in the homogeneous and isotropic medium</span>
+
+<span class="sd">    :param dt: The time sampling step for integration and differentiation calculations</span>
+<span class="sd">    :param density: The density at the source</span>
+<span class="sd">    :param transversal_radiation: The transversal_radiation pattern in the far field</span>
+<span class="sd">    :param radial_radiation: The radial radiation pattern in the far field</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">density</span><span class="p">,</span> <span class="n">transversal_radiation</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">radial_radiation</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param dt: The time sampling step for integration and differentiation calculations</span>
+<span class="sd">        :param density: The density at the source</span>
+<span class="sd">        :param transversal_radiation: The transversal_radiation pattern in the far field</span>
+<span class="sd">        :param radial_radiation: The radial radiation pattern in the far field</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">density</span><span class="p">,</span> <span class="n">transversal_radiation</span><span class="o">=</span><span class="n">transversal_radiation</span><span class="p">,</span>
+                         <span class="n">radial_radiation</span><span class="o">=</span><span class="n">radial_radiation</span><span class="p">)</span>
+        <span class="k">pass</span>
+
+<div class="viewcode-block" id="HomogeneousGreenFunction.near">
+<a class="viewcode-back" href="../api_lib.html#green_functions.HomogeneousGreenFunction.near">[docs]</a>
+    <span class="k">def</span> <span class="nf">near</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_model</span><span class="p">,</span> <span class="n">distance</span><span class="p">,</span> <span class="n">vp</span><span class="p">,</span> <span class="n">vs</span><span class="p">,</span> <span class="n">times</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the near part of the displacement</span>
+<span class="sd">        of the Green function in the homogeneous and isotropic medium.</span>
+
+<span class="sd">        .. math::</span>
+<span class="sd">            u_* \left(r, t \right) = \frac{R^{N*}}{4\pi\rho r^4}\int_{r/v_p}^{r/v_s}\tau M\left( t-\tau \right)d\tau,</span>
+
+<span class="sd">        where * means radial or transversal part, :math:`u \left(r, t \right)` is the displacement,</span>
+<span class="sd">        :math:`R^{N*}` is the radiation of radial or transversal near field pattern</span>
+<span class="sd">        :math:`R^{NR}= 9R^{FR}` and :math:`R^{NT}= -6R^{FT}` (see far field radiation),</span>
+<span class="sd">        :math:`r` is the hypocentral distance, :math:`\rho` is the density at the source,</span>
+<span class="sd">        :math:`v_p` and :math:`v_s` are P and S velocities at the source,</span>
+<span class="sd">        :math:`M\left( t \right)` is the source time function.</span>
+<span class="sd">        The integration is realised by the convolution of the source time function nad the signal</span>
+<span class="sd">        :math:`t(H(t-r/v_p) - H(t-r/v_s))`, where :math:`H(t)` is Heaviside step function.</span>
+<span class="sd">            </span>
+<span class="sd">        :param source_model: The source model object.</span>
+<span class="sd">        :param distance: The hypocentral distance</span>
+<span class="sd">        :param vp: The P wave velocity.</span>
+<span class="sd">        :param vs: The S wave velocity.</span>
+<span class="sd">        :param times: Time samples. The samples steps must equal dt </span>
+<span class="sd">        :return: The radial and transversal displacement in the near field</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">tp</span> <span class="o">=</span> <span class="n">distance</span> <span class="o">/</span> <span class="n">vp</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="n">distance</span> <span class="o">/</span> <span class="n">vs</span>
+        <span class="n">phases_function</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">_phases_function</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span> <span class="n">ts</span><span class="p">,</span> <span class="n">t</span><span class="o">+</span><span class="n">tp</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">(</span><span class="n">times</span><span class="p">)])</span>
+        <span class="n">convolution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">phases_function</span><span class="p">,</span> <span class="n">source_model</span><span class="p">(</span><span class="n">times</span><span class="p">))</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span>
+        <span class="n">radial</span> <span class="o">=</span> <span class="mf">9.0</span> <span class="o">*</span> <span class="n">convolution</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">radial_radiation</span> <span class="o">/</span> <span class="mf">4.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">distance</span> <span class="o">**</span> <span class="mi">4</span>
+        <span class="n">transversal</span> <span class="o">=</span> <span class="o">-</span><span class="mf">6.0</span> <span class="o">*</span> <span class="n">convolution</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">transversal_radiation</span> <span class="o">/</span> <span class="mf">4.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">distance</span> <span class="o">**</span> <span class="mi">4</span>
+        <span class="k">return</span> <span class="n">radial</span><span class="p">,</span> <span class="n">transversal</span></div>
+
+
+<div class="viewcode-block" id="HomogeneousGreenFunction.intermediate">
+<a class="viewcode-back" href="../api_lib.html#green_functions.HomogeneousGreenFunction.intermediate">[docs]</a>
+    <span class="k">def</span> <span class="nf">intermediate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_model</span><span class="p">,</span> <span class="n">distance</span><span class="p">,</span> <span class="n">vp</span><span class="p">,</span> <span class="n">vs</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="n">phase</span><span class="o">=</span><span class="s1">&#39;P&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the intermediate part of the displacement</span>
+<span class="sd">        of the Green function in the homogeneous and isotropic medium.</span>
+
+<span class="sd">        .. math::</span>
+<span class="sd">            u_* \left(r, t \right) = \frac{R^{I*}}{4\pi\rho v^2 r^2} M\left( t \right),</span>
+
+<span class="sd">        where :math * means radial or transversal part,</span>
+<span class="sd">        :math:`u \left(r, t \right)` is the displacement,</span>
+<span class="sd">        :math:`R^{I*}` is the radiation of radial or transversal near field pattern,</span>
+<span class="sd">        :math:`r` is the hypocentral distance, :math:`\rho` is the density at the source,</span>
+<span class="sd">        :math:`v` is the P or S velocity,</span>
+<span class="sd">        :math:`M\left( t \right)` is the source time function.</span>
+<span class="sd">        For P wave :math:`R^{IR}= 4R^{FR}` and :math:`R^{IT}= -2R^{FT}` (see far field radiation),</span>
+<span class="sd">        for S wave :math:`R^{IR}= -3R^{FR}` and :math:`R^{IT}= 3R^{FT}` (see far field radiation).</span>
+
+<span class="sd">        :param source_model: The source model object.</span>
+<span class="sd">        :param distance: The hypocentral distance</span>
+<span class="sd">        :param vp: The P wave velocity.</span>
+<span class="sd">        :param vs: The S wave velocity.</span>
+<span class="sd">        :param times: Time samples. The samples steps must equal dt</span>
+<span class="sd">        :param phase: The phase name: &#39;P&#39; or &#39;S&#39;</span>
+<span class="sd">        :return: The radial and transversal displacement in the near field</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">source_times</span> <span class="o">=</span> <span class="n">source_model</span><span class="p">(</span><span class="n">times</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">phase</span> <span class="o">==</span> <span class="s1">&#39;P&#39;</span><span class="p">:</span>
+            <span class="n">radial</span> <span class="o">=</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="n">source_times</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">radial_radiation</span> <span class="o">/</span> <span class="mf">4.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">distance</span> <span class="o">**</span> <span class="mi">4</span> <span class="o">/</span> <span class="n">vp</span> <span class="o">**</span> <span class="mi">2</span>
+            <span class="n">transversal</span> <span class="o">=</span> <span class="o">-</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">source_times</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">transversal_radiation</span> <span class="o">/</span> <span class="mf">4.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">distance</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">vp</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">radial</span> <span class="o">=</span> <span class="o">-</span><span class="mf">3.0</span> <span class="o">*</span> <span class="n">source_times</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">radial_radiation</span> <span class="o">/</span> <span class="mf">4.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">distance</span> <span class="o">**</span> <span class="mi">4</span> <span class="o">/</span> <span class="n">vp</span> <span class="o">**</span> <span class="mi">2</span>
+            <span class="n">transversal</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">*</span> <span class="n">source_times</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">transversal_radiation</span> <span class="o">/</span> <span class="mf">4.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">distance</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">vs</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="k">return</span> <span class="n">radial</span><span class="p">,</span> <span class="n">transversal</span></div>
+
+
+<div class="viewcode-block" id="HomogeneousGreenFunction.far">
+<a class="viewcode-back" href="../api_lib.html#green_functions.HomogeneousGreenFunction.far">[docs]</a>
+    <span class="k">def</span> <span class="nf">far</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_model</span><span class="p">,</span> <span class="n">distance</span><span class="p">,</span> <span class="n">vp</span><span class="p">,</span> <span class="n">vs</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="n">phase</span><span class="o">=</span><span class="s1">&#39;P&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the far part of the displacement</span>
+<span class="sd">        of the Green function in the homogeneous and isotropic medium.</span>
+
+<span class="sd">        .. math::</span>
+<span class="sd">            u_* \left(r, t \right) = \frac{R^{I*}}{4\pi\rho v^3 r } \dot{M}\left( t \right),</span>
+
+<span class="sd">        where :math * means radial or transversal part, which in the case of far field is equivalent of the P or S wave,</span>
+<span class="sd">        :math:`u \left(r, t \right)` is the displacement,</span>
+<span class="sd">        :math:`R^{F*}` is the radiation of radial or transversal near field pattern,</span>
+<span class="sd">        :math:`r` is the hypocentral distance, :math:`\rho` is the density at the source,</span>
+<span class="sd">        :math:`v` is the P or S velocity,</span>
+<span class="sd">        :math:`\dot{M}\left( t \right)` is the time derivative of source time function.</span>
+
+<span class="sd">        :param source_model: The source model object.</span>
+<span class="sd">        :param distance: The hypocentral distance</span>
+<span class="sd">        :param vp: The P wave velocity.</span>
+<span class="sd">        :param vs: The S wave velocity.</span>
+<span class="sd">        :param times: Time samples. The samples steps must equal dt.</span>
+<span class="sd">        :param phase: The phase name: &#39;P&#39; or &#39;S&#39;</span>
+<span class="sd">        :return: The radial and transversal displacement in the near field</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">source_diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">source_model</span><span class="p">(</span><span class="n">times</span><span class="p">))</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span>
+        <span class="k">if</span> <span class="n">phase</span> <span class="o">==</span> <span class="s1">&#39;P&#39;</span><span class="p">:</span>
+            <span class="n">radial</span> <span class="o">=</span> <span class="n">source_diff</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">radial_radiation</span> <span class="o">/</span> <span class="mf">4.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">distance</span> <span class="o">/</span> <span class="n">vp</span> <span class="o">**</span> <span class="mi">3</span>
+            <span class="k">return</span> <span class="n">radial</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">radial</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">transversal</span> <span class="o">=</span> <span class="n">source_diff</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">transversal_radiation</span> <span class="o">/</span> <span class="mf">4.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">distance</span> <span class="o">/</span> <span class="n">vs</span> <span class="o">**</span> <span class="mi">3</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">transversal</span><span class="o">.</span><span class="n">size</span><span class="p">),</span> <span class="n">transversal</span></div>
+</div>
+
+
+
+<span class="k">def</span> <span class="nf">get_green_function</span><span class="p">(</span><span class="n">configuration</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">density</span><span class="p">,</span> <span class="n">transversal_radiation</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">radial_radiation</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+    <span class="n">green_function</span> <span class="o">=</span> <span class="n">configuration</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;green_function&#39;</span><span class="p">,</span> <span class="s1">&#39;homogeneous&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">green_function</span> <span class="o">==</span> <span class="s1">&#39;homogeneous&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">HomogeneousGreenFunction</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">density</span><span class="p">,</span> <span class="n">transversal_radiation</span><span class="o">=</span><span class="n">transversal_radiation</span><span class="p">,</span>
+                                        <span class="n">radial_radiation</span><span class="o">=</span><span class="n">radial_radiation</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">SSSException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Wrong Green function name &#39;</span><span class="si">{</span><span class="n">green_function</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Jan Wiszniowski.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

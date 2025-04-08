@@ -1,0 +1,208 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1. Methodology &mdash; Anthropogenic Mw 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="2. Configuration" href="configuration.html" />
+    <link rel="prev" title="SSSPy documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: blue" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Anthropogenic Mw
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Methodology</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#source-time-functions">1.1. Source time functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#displacement-calculation">1.2. Displacement calculation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">2. Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">3. SSSPy API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">4. References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: blue" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Anthropogenic Mw</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">1. </span>Methodology</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/description.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="methodology">
+<h1><span class="section-number">1. </span>Methodology<a class="headerlink" href="#methodology" title="Link to this heading"></a></h1>
+<p>The goal of this programme was the assessment of the near and intermediate field influence on the seismic signal parameters,
+like maximum displacement amplitude of specific phases.
+The assessment is based on a very simple seismic signal simulation.
+The assumption point source, homogeneous and isotropic medium, simple Haskell <span id="id1">[<a class="reference internal" href="bibliography.html#id13" title="N. A. Haskell. Total energy and energy spectral density of elastic wave radiation from propagating faults. Bulletin of the Seismological Society of America, 54(6A):1811-1841, 12 1964. URL: https://doi.org/10.1785/BSSA05406A1811, arXiv:https://pubs.geoscienceworld.org/ssa/bssa/article-pdf/54/6A/1811/5348868/bssa05406a1811.pdf, doi:10.1785/BSSA05406A1811.">Haskell, 1964</a>]</span> source time function,
+and a double couple mechanism was taken.
+Additionally, the Brune model:cite:<cite>Brune1970</cite>,:cite:<cite>Brune1971</cite>
+and Knopoff and Gillbert <span id="id2">[<a class="reference internal" href="bibliography.html#id14" title="Leon Knopoff and Freeman Gilbert. Radiation from a strike-slip fault. Bulletin of the Seismological Society of America, 49(2):163-178, 04 1959. URL: https://doi.org/10.1785/BSSA0490020163, arXiv:https://pubs.geoscienceworld.org/ssa/bssa/article-pdf/49/2/163/5303329/bssa0490020163.pdf, doi:10.1785/BSSA0490020163.">Knopoff and Gilbert, 1959</a>]</span>
+are analysed to check the source time function impact on the estimates.
+Knopoff and Gillbert source time function is tested only in the frequency domain.
+The the radial component of displacement is analyzed, which partially equals the signal of the P wave
+and was used for moment tensor estimation in many anthropogenic seismicity cases for the moment tensor estimation
+e.g. <span id="id3">[<a class="reference internal" href="bibliography.html#id10" title="Paweł Wiejacz. Calculation of seismic moment tensor for mine tremors from the legnica-głogów copper basin. Acta Geophysica Polonica, XI(2):103-122, 1992.">Wiejacz, 1992</a>]</span>, <span id="id4">[<a class="reference internal" href="bibliography.html#id9" title="Grzegorz Lizurek, Jan Wiszniowski, Nguyen Van Giang, Beata Plesiewicz, and Dinh Quoc Van. Clustering and stress inversion in the song tranh 2 reservoir, vietnam. Bulletin of the Seismological Society of America, 107(6):2636-2648, 09 2017. URL: https://doi.org/10.1785/0120170042, arXiv:https://pubs.geoscienceworld.org/ssa/bssa/article-pdf/107/6/2636/3992585/bssa-2017042.1.pdf, doi:10.1785/0120170042.">Lizurek <em>et al.</em>, 2017</a>]</span>.</p>
+<section id="source-time-functions">
+<h2><span class="section-number">1.1. </span>Source time functions<a class="headerlink" href="#source-time-functions" title="Link to this heading"></a></h2>
+<p>For simplicity the Haskell <span id="id5">[<a class="reference internal" href="bibliography.html#id13" title="N. A. Haskell. Total energy and energy spectral density of elastic wave radiation from propagating faults. Bulletin of the Seismological Society of America, 54(6A):1811-1841, 12 1964. URL: https://doi.org/10.1785/BSSA05406A1811, arXiv:https://pubs.geoscienceworld.org/ssa/bssa/article-pdf/54/6A/1811/5348868/bssa05406a1811.pdf, doi:10.1785/BSSA05406A1811.">Haskell, 1964</a>]</span> source time function is tested
+and, additionally, for comparison, the Brune model:cite:<cite>Brune1970</cite>,:cite:<cite>Brune1971</cite>
+source time function is applied and the Knopoff and Gillbert <span id="id6">[<a class="reference internal" href="bibliography.html#id14" title="Leon Knopoff and Freeman Gilbert. Radiation from a strike-slip fault. Bulletin of the Seismological Society of America, 49(2):163-178, 04 1959. URL: https://doi.org/10.1785/BSSA0490020163, arXiv:https://pubs.geoscienceworld.org/ssa/bssa/article-pdf/49/2/163/5303329/bssa0490020163.pdf, doi:10.1785/BSSA0490020163.">Knopoff and Gilbert, 1959</a>]</span>
+model only in the frequency domain.</p>
+<p>The Haskell source time function is</p>
+<div class="math notranslate nohighlight" id="equation-eq-b1">
+<span class="eqno">(1)<a class="headerlink" href="#equation-eq-b1" title="Link to this equation"></a></span>\[\begin{split}M\left( t \right)= \begin{cases}
+0 &amp; \text{ for } t &lt; 0 \\
+tM_0/\tau &amp; \text{ for } 0 \leqslant  t \leqslant \tau \\
+M_0 &amp; \text{ for } t &gt; \tau
+\end{cases},\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(M_0\)</span> is the moment, and <span class="math notranslate nohighlight">\(\tau\)</span> is the rapture time.
+The alternative form of <a class="reference internal" href="#equation-eq-b1">(1)</a> is</p>
+<div class="math notranslate nohighlight">
+\[M\left( t \right) = \frac{M_0}{\tau}\left[ tH\left( t \right)-\left( t-\tau \right)H\left( t-\tau \right) \right]\]</div>
+<p>where <span class="math notranslate nohighlight">\(H\left( t \right)\)</span> is Heaviside step function.</p>
+<p>In the frequency domain, Haskell source function is</p>
+<div class="math notranslate nohighlight" id="equation-eq-b2">
+<span class="eqno">(2)<a class="headerlink" href="#equation-eq-b2" title="Link to this equation"></a></span>\[M\left( \omega \right) = \frac{M_0}{\tau\omega^2}\left[ \exp\left( -j\omega\tau \right)-1 \right],\]</div>
+<p>where <span class="math notranslate nohighlight">\(\omega=2\pi f\)</span>.</p>
+<p>The Brune source time function is</p>
+<div class="math notranslate nohighlight" id="equation-eq-b3">
+<span class="eqno">(3)<a class="headerlink" href="#equation-eq-b3" title="Link to this equation"></a></span>\[M\left( t \right) = M_0\left[ 1 - \exp\left( -t/ \tau \right)\left( t/ \tau +1 \right) \right].\]</div>
+<p>In the frequency domain, Brune source function is</p>
+<div class="math notranslate nohighlight" id="equation-eq-b4">
+<span class="eqno">(4)<a class="headerlink" href="#equation-eq-b4" title="Link to this equation"></a></span>\[M\left( \omega \right) = \frac{M_0\omega_0^2}{j\omega\left( \omega_0^2-\omega^2  \right)},\]</div>
+<p>where <span class="math notranslate nohighlight">\(\omega_0=1 / \tau\)</span>.</p>
+<p>The simplest Knopoff and Gillbert model well displays the near and intermediate effect
+in the frequency domain, because</p>
+<div class="math notranslate nohighlight" id="equation-eq-b5">
+<span class="eqno">(5)<a class="headerlink" href="#equation-eq-b5" title="Link to this equation"></a></span>\[M\left( \omega \right) = M_0.\]</div>
+</section>
+<section id="displacement-calculation">
+<h2><span class="section-number">1.2. </span>Displacement calculation<a class="headerlink" href="#displacement-calculation" title="Link to this heading"></a></h2>
+<p>With assumptions that simplify the model, we use the total displacement in homogeneous and isotropic medium
+caused by the point double couple formula <span id="id7">[<a class="reference internal" href="bibliography.html#id11" title="Keiiti Aki and Paul G. Richards. Quantitative Seismology. University Science Books, 2 edition, 2002. ISBN 0935702962. URL: http://www.worldcat.org/isbn/0935702962.">Aki and Richards, 2002</a>]</span></p>
+<div class="math notranslate nohighlight" id="equation-eq-a1">
+<span class="eqno">(6)<a class="headerlink" href="#equation-eq-a1" title="Link to this equation"></a></span>\[\mathbf{u}\left ( \mathbf{r},t \right )=
+\mathbf{u}_R\left ( \mathbf{r},t \right )+
+\mathbf{u_T}\left ( \mathbf{r},t \right )\]</div>
+<p>left ( mathbf{Theta}+mathbf{Phi} right )
+mathbf{R}
+where <span class="math notranslate nohighlight">\(u_R\)</span> is the radial part of the displacement, <span class="math notranslate nohighlight">\(u_T\)</span> is the transversal part of the displacement,
+<span class="math notranslate nohighlight">\(\mathbf{R}\)</span> is the unit vector of the source-receiver radial direction,
+<span class="math notranslate nohighlight">\(\mathbf{\Phi}\)</span> is the perpendicular to the radial direction horizontal unit vector,
+and <span class="math notranslate nohighlight">\(\mathbf{\Theta}\)</span> is the unit vector completing the coordinate system.</p>
+<div class="math notranslate nohighlight" id="equation-eq-a2">
+<span class="eqno">(7)<a class="headerlink" href="#equation-eq-a2" title="Link to this equation"></a></span>\[\mathbf{\mathbf{u}}_* \left(r, t \right) =
+\frac{\mathbf{R}^{N*}}{4\pi\rho r^4}\int_{r/v_p}^{r/v_s}\tau M\left( t-\tau \right)d\tau
++ \left[ \frac{\mathbf{R}^{I*P}}{v_p^2} + \frac{\mathbf{R}^{I*S}}{v_s^2} \right]
+\frac{1}{4\pi\rho r^2}M\left( t \right)
++\frac{\mathbf{R}^{F*}}{4\pi\rho v_*^3 r } \dot{M}\left( t \right),\]</div>
+<p>where <span class="math notranslate nohighlight">\(*\)</span> means either a radial (<span class="math notranslate nohighlight">\(R\)</span>) or transversal (<span class="math notranslate nohighlight">\(T\)</span>) member of <a class="reference internal" href="#equation-eq-a1">(6)</a>,
+<span class="math notranslate nohighlight">\(v_*=v_p\)</span> for radial component and <span class="math notranslate nohighlight">\(v_*=v_s\)</span> for transversal component.
+radiation patterns of the near and intermediate fields depend on the far field radiation patterns according to
+<span class="math notranslate nohighlight">\(\mathbf{R}^{IRP}= 4\mathbf{R}^{FR}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{R}^{IRS}= -3\mathbf{R}^{FR}\)</span>,
+<span class="math notranslate nohighlight">\(\mathbf{R}^{ITP}= -2\mathbf{R}^{FT}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{R}^{ITS}= 3\mathbf{R}^{FT}\)</span>,
+<span class="math notranslate nohighlight">\(\mathbf{R}^{NR}= 9\mathbf{R}^{FT}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{R}^{NT}= -6\mathbf{R}^{FT}\)</span>.
+Far field patterns exact description,
+which depend on the direction angles <span id="id8">[<a class="reference internal" href="bibliography.html#id11" title="Keiiti Aki and Paul G. Richards. Quantitative Seismology. University Science Books, 2 edition, 2002. ISBN 0935702962. URL: http://www.worldcat.org/isbn/0935702962.">Aki and Richards, 2002</a>]</span>,
+has no significance for our research.</p>
+<p>The assessment of the near field displacement required the calculation of
+<span class="math notranslate nohighlight">\(\int_{r/v_p}^{r/v_s}\tau M\left( t-\tau \right)d\tau\)</span>,
+which in the time domain is the convolution of the source time function
+<span class="math notranslate nohighlight">\(M\left( t \right)\)</span> and the function described by the formula</p>
+<div class="math notranslate nohighlight" id="equation-eq-a3">
+<span class="eqno">(8)<a class="headerlink" href="#equation-eq-a3" title="Link to this equation"></a></span>\[G\left( t \right) = t(H(t-r/v_p) - H(t-r/v_s)),\]</div>
+<p>where <span class="math notranslate nohighlight">\(H\left( t \right)\)</span> is Heaviside step function.
+In the frequency domain, the calculation of the near field displacement required the multiplication of
+source complex function in the frequency domain <span class="math notranslate nohighlight">\(M\left( \omega \right)\)</span> and the function</p>
+<div class="math notranslate nohighlight" id="equation-eq-a4">
+<span class="eqno">(9)<a class="headerlink" href="#equation-eq-a4" title="Link to this equation"></a></span>\[G\left( \omega \right) = \frac{\left(j\omega r/v_s+1\right)exp\left(-j\omega r/v_s\right)
+-\left(j\omega r/v_p+1\right)exp\left(-j\omega r/v_p\right)}{\omega ^2}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\omega=2\pi f\)</span> and <span class="math notranslate nohighlight">\(j=\sqrt{-1}\)</span> is.</p>
+<p>The assessment of the far field displacement required the differentiate
+of source time function.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="SSSPy documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="configuration.html" class="btn btn-neutral float-right" title="2. Configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Jan Wiszniowski.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

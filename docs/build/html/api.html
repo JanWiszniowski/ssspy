@@ -1,0 +1,147 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3. SSSPy API &mdash; Anthropogenic Mw 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="3.1. Executable modules" href="api_run.html" />
+    <link rel="prev" title="2. Configuration" href="configuration.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: blue" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Anthropogenic Mw
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="description.html">1. Methodology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">2. Configuration</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. SSSPy API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_run.html">3.1. Executable modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_lib.html">3.2. Library modules</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">4. References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: blue" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Anthropogenic Mw</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">3. </span>SSSPy API</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ssspy-api">
+<h1><span class="section-number">3. </span>SSSPy API<a class="headerlink" href="#ssspy-api" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api_run.html">3.1. Executable modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_run.html#simple-seismic-simulation">3.1.1. Simple seismic simulation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api_lib.html">3.2. Library modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_lib.html#utils-for-simple-seismic-simulation">3.2.1. Utils for simple seismic simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_lib.html#utils.SSSException"><code class="docutils literal notranslate"><span class="pre">SSSException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_lib.html#simple-seismic-source-models">3.2.2. Simple seismic source models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_lib.html#source_models.BaseSourceModel"><code class="docutils literal notranslate"><span class="pre">BaseSourceModel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_lib.html#source_models.BruneSourceModel"><code class="docutils literal notranslate"><span class="pre">BruneSourceModel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_lib.html#source_models.HaskellSourceModel"><code class="docutils literal notranslate"><span class="pre">HaskellSourceModel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_lib.html#green-function-in-the-time-domain">3.2.3. Green function in the time domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_lib.html#green_functions.BaseGreenFunction"><code class="docutils literal notranslate"><span class="pre">BaseGreenFunction</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_lib.html#green_functions.BaseGreenFunction.far"><code class="docutils literal notranslate"><span class="pre">BaseGreenFunction.far()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_lib.html#green_functions.BaseGreenFunction.intermediate"><code class="docutils literal notranslate"><span class="pre">BaseGreenFunction.intermediate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_lib.html#green_functions.BaseGreenFunction.near"><code class="docutils literal notranslate"><span class="pre">BaseGreenFunction.near()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api_lib.html#green_functions.HomogeneousGreenFunction"><code class="docutils literal notranslate"><span class="pre">HomogeneousGreenFunction</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_lib.html#green_functions.HomogeneousGreenFunction.far"><code class="docutils literal notranslate"><span class="pre">HomogeneousGreenFunction.far()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_lib.html#green_functions.HomogeneousGreenFunction.intermediate"><code class="docutils literal notranslate"><span class="pre">HomogeneousGreenFunction.intermediate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_lib.html#green_functions.HomogeneousGreenFunction.near"><code class="docutils literal notranslate"><span class="pre">HomogeneousGreenFunction.near()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="configuration.html" class="btn btn-neutral float-left" title="2. Configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api_run.html" class="btn btn-neutral float-right" title="3.1. Executable modules" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Jan Wiszniowski.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

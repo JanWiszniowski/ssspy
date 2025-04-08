@@ -1,0 +1,414 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3.2. Library modules &mdash; Anthropogenic Mw 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="4. References" href="bibliography.html" />
+    <link rel="prev" title="3.1. Executable modules" href="api_run.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: blue" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Anthropogenic Mw
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="description.html">1. Methodology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">2. Configuration</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api.html">3. SSSPy API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="api_run.html">3.1. Executable modules</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3.2. Library modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#utils-for-simple-seismic-simulation">3.2.1. Utils for simple seismic simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#utils.SSSException"><code class="docutils literal notranslate"><span class="pre">SSSException</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#simple-seismic-source-models">3.2.2. Simple seismic source models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#source_models.BaseSourceModel"><code class="docutils literal notranslate"><span class="pre">BaseSourceModel</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#source_models.BruneSourceModel"><code class="docutils literal notranslate"><span class="pre">BruneSourceModel</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#source_models.HaskellSourceModel"><code class="docutils literal notranslate"><span class="pre">HaskellSourceModel</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#green-function-in-the-time-domain">3.2.3. Green function in the time domain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#green_functions.BaseGreenFunction"><code class="docutils literal notranslate"><span class="pre">BaseGreenFunction</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#green_functions.BaseGreenFunction.far"><code class="docutils literal notranslate"><span class="pre">BaseGreenFunction.far()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#green_functions.BaseGreenFunction.intermediate"><code class="docutils literal notranslate"><span class="pre">BaseGreenFunction.intermediate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#green_functions.BaseGreenFunction.near"><code class="docutils literal notranslate"><span class="pre">BaseGreenFunction.near()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#green_functions.HomogeneousGreenFunction"><code class="docutils literal notranslate"><span class="pre">HomogeneousGreenFunction</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#green_functions.HomogeneousGreenFunction.far"><code class="docutils literal notranslate"><span class="pre">HomogeneousGreenFunction.far()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#green_functions.HomogeneousGreenFunction.intermediate"><code class="docutils literal notranslate"><span class="pre">HomogeneousGreenFunction.intermediate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#green_functions.HomogeneousGreenFunction.near"><code class="docutils literal notranslate"><span class="pre">HomogeneousGreenFunction.near()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">4. References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: blue" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Anthropogenic Mw</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="api.html"><span class="section-number">3. </span>SSSPy API</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">3.2. </span>Library modules</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/api_lib.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="library-modules">
+<h1><span class="section-number">3.2. </span>Library modules<a class="headerlink" href="#library-modules" title="Link to this heading"></a></h1>
+<p>The library modules contains classes and function
+required in ether module includin executable modules.</p>
+<section id="utils-for-simple-seismic-simulation">
+<span id="module-utils"></span><h2><span class="section-number">3.2.1. </span>Utils for simple seismic simulation<a class="headerlink" href="#utils-for-simple-seismic-simulation" title="Link to this heading"></a></h2>
+<dl class="field-list simple">
+<dt class="field-odd">copyright<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Jan Wiszniowski (<a class="reference external" href="mailto:jwisz&#37;&#52;&#48;igf&#46;edu&#46;pl">jwisz<span>&#64;</span>igf<span>&#46;</span>edu<span>&#46;</span>pl</a>)</p>
+</dd>
+<dt class="field-even">license<span class="colon">:</span></dt>
+<dd class="field-even"><p>GNU Lesser General Public License, Version 3
+(<a class="reference external" href="https://www.gnu.org/copyleft/lesser.html">https://www.gnu.org/copyleft/lesser.html</a>)</p>
+</dd>
+<dt class="field-odd">version 0.0.1<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2025-02-07</p>
+</dd>
+</dl>
+</section>
+<dl class="py exception">
+<dt class="sig sig-object py" id="utils.SSSException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">utils.</span></span><span class="sig-name descname"><span class="pre">SSSException</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'other'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#SSSException"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.SSSException" title="Link to this definition"></a></dt>
+<dd><p>The simple seismic signal simulation exception class</p>
+</dd></dl>
+
+<section id="simple-seismic-source-models">
+<span id="module-source_models"></span><h2><span class="section-number">3.2.2. </span>Simple seismic source models<a class="headerlink" href="#simple-seismic-source-models" title="Link to this heading"></a></h2>
+<dl class="field-list simple">
+<dt class="field-odd">copyright<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Jan Wiszniowski (<a class="reference external" href="mailto:jwisz&#37;&#52;&#48;igf&#46;edu&#46;pl">jwisz<span>&#64;</span>igf<span>&#46;</span>edu<span>&#46;</span>pl</a>)</p>
+</dd>
+<dt class="field-even">license<span class="colon">:</span></dt>
+<dd class="field-even"><p>GNU Lesser General Public License, Version 3
+(<a class="reference external" href="https://www.gnu.org/copyleft/lesser.html">https://www.gnu.org/copyleft/lesser.html</a>)</p>
+</dd>
+<dt class="field-odd">version 0.0.1<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2025-02-07</p>
+</dd>
+</dl>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="source_models.BaseSourceModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">source_models.</span></span><span class="sig-name descname"><span class="pre">BaseSourceModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_parameters</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/source_models.html#BaseSourceModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#source_models.BaseSourceModel" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="source_models.BruneSourceModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">source_models.</span></span><span class="sig-name descname"><span class="pre">BruneSourceModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_parameters</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/source_models.html#BruneSourceModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#source_models.BruneSourceModel" title="Link to this definition"></a></dt>
+<dd><p>Brune source model in the time domain is described as</p>
+<div class="math notranslate nohighlight">
+\[M\left( t \right) = M_0\left[ 1 - \exp\left( -t/ \tau \right)\left( t/ \tau +1 \right) \right],\]</div>
+<p>where <span class="math notranslate nohighlight">\(M_0\)</span> is the seismic moment value, <span class="math notranslate nohighlight">\(\tau\)</span> is the rupture time,
+and <span class="math notranslate nohighlight">\(H(t)\)</span> is Heaviside step function.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="source_models.HaskellSourceModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">source_models.</span></span><span class="sig-name descname"><span class="pre">HaskellSourceModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_parameters</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/source_models.html#HaskellSourceModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#source_models.HaskellSourceModel" title="Link to this definition"></a></dt>
+<dd><p>Haskell source model in the time domain is described as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}M\left( t \right)= \begin{cases}
+0 &amp; \text{ for } t &lt; 0 \\
+tM_0/\tau &amp; \text{ for } 0 \leqslant  t \leqslant \tau \\
+M_0 &amp; \text{ for } t &gt; \tau
+\end{cases},\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(M_0\)</span> is the seismic moment value, <span class="math notranslate nohighlight">\(\tau\)</span> is the rupture time,
+and <span class="math notranslate nohighlight">\(H(t)\)</span> is Heaviside step function.</p>
+</dd></dl>
+
+<section id="green-function-in-the-time-domain">
+<span id="module-green_functions"></span><h2><span class="section-number">3.2.3. </span>Green function in the time domain<a class="headerlink" href="#green-function-in-the-time-domain" title="Link to this heading"></a></h2>
+<dl class="field-list simple">
+<dt class="field-odd">copyright<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Jan Wiszniowski (<a class="reference external" href="mailto:jwisz&#37;&#52;&#48;igf&#46;edu&#46;pl">jwisz<span>&#64;</span>igf<span>&#46;</span>edu<span>&#46;</span>pl</a>)</p>
+</dd>
+<dt class="field-even">license<span class="colon">:</span></dt>
+<dd class="field-even"><p>GNU Lesser General Public License, Version 3
+(<a class="reference external" href="https://www.gnu.org/copyleft/lesser.html">https://www.gnu.org/copyleft/lesser.html</a>)</p>
+</dd>
+<dt class="field-odd">version 0.0.1<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2025-02-07</p>
+</dd>
+</dl>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="green_functions.BaseGreenFunction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">green_functions.</span></span><span class="sig-name descname"><span class="pre">BaseGreenFunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">density</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transversal_radiation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radial_radiation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/green_functions.html#BaseGreenFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#green_functions.BaseGreenFunction" title="Link to this definition"></a></dt>
+<dd><p>The base class of Green function classes. It required in derived classes definitions of three functions:</p>
+<ul class="simple">
+<li><p>near(self, source_model, distance, vp, vs, times)</p></li>
+<li><p>intermediate(self, source_model, distance, vp, vs, times)</p></li>
+<li><p>far(self, source_model, distance, vp, vs, times)</p></li>
+</ul>
+<p>They return radial and transversal displacement responses.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dt</strong> – The time sampling step for integration and differentiation calculations,</p></li>
+<li><p><strong>density</strong> – The density at the source,</p></li>
+<li><p><strong>transversal_radiation</strong> – The transversal_radiation pattern in the far field,</p></li>
+<li><p><strong>radial_radiation</strong> – The radial radiation pattern in the far field.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="green_functions.BaseGreenFunction.far">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">far</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">times</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'P'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/green_functions.html#BaseGreenFunction.far"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#green_functions.BaseGreenFunction.far" title="Link to this definition"></a></dt>
+<dd><p>Compute the far part of the displacement</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source_model</strong> – The source model object,</p></li>
+<li><p><strong>distance</strong> – The hypocentral distance,</p></li>
+<li><p><strong>vp</strong> – The P wave velocity,</p></li>
+<li><p><strong>vs</strong> – The S wave velocity,</p></li>
+<li><p><strong>times</strong> – Time samples. The samples steps must equal dt,</p></li>
+<li><p><strong>phase</strong> – The phase name: ‘P’ or ‘S’,</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The radial and transversal displacement in the far field,</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="green_functions.BaseGreenFunction.intermediate">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">intermediate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">times</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'P'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/green_functions.html#BaseGreenFunction.intermediate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#green_functions.BaseGreenFunction.intermediate" title="Link to this definition"></a></dt>
+<dd><p>Compute the intermediate part of the displacement</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source_model</strong> – The source model object,</p></li>
+<li><p><strong>distance</strong> – The hypocentral distance,</p></li>
+<li><p><strong>vp</strong> – The P wave velocity,</p></li>
+<li><p><strong>vs</strong> – The S wave velocity,</p></li>
+<li><p><strong>times</strong> – Time samples. The samples steps must equal dt,</p></li>
+<li><p><strong>phase</strong> – The phase name: ‘P’ or ‘S’,</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The radial and transversal displacement in the far field,</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="green_functions.BaseGreenFunction.near">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">near</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">times</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/green_functions.html#BaseGreenFunction.near"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#green_functions.BaseGreenFunction.near" title="Link to this definition"></a></dt>
+<dd><p>Compute the near part of the displacement</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source_model</strong> – The source model object,</p></li>
+<li><p><strong>distance</strong> – The hypocentral distance,</p></li>
+<li><p><strong>vp</strong> – The P wave velocity,</p></li>
+<li><p><strong>vs</strong> – The S wave velocity,</p></li>
+<li><p><strong>times</strong> – Time samples. The samples steps must equal dt,</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The radial and transversal displacement in the far field,</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="green_functions.HomogeneousGreenFunction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">green_functions.</span></span><span class="sig-name descname"><span class="pre">HomogeneousGreenFunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">density</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transversal_radiation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radial_radiation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/green_functions.html#HomogeneousGreenFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#green_functions.HomogeneousGreenFunction" title="Link to this definition"></a></dt>
+<dd><p>The Green function in the homogeneous and isotropic medium</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dt</strong> – The time sampling step for integration and differentiation calculations</p></li>
+<li><p><strong>density</strong> – The density at the source</p></li>
+<li><p><strong>transversal_radiation</strong> – The transversal_radiation pattern in the far field</p></li>
+<li><p><strong>radial_radiation</strong> – The radial radiation pattern in the far field</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="green_functions.HomogeneousGreenFunction.far">
+<span class="sig-name descname"><span class="pre">far</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">times</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'P'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/green_functions.html#HomogeneousGreenFunction.far"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#green_functions.HomogeneousGreenFunction.far" title="Link to this definition"></a></dt>
+<dd><p>Compute the far part of the displacement
+of the Green function in the homogeneous and isotropic medium.</p>
+<div class="math notranslate nohighlight">
+\[u_* \left(r, t \right) = \frac{R^{I*}}{4\pi\rho v^3 r } \dot{M}\left( t \right),\]</div>
+<p>where :math * means radial or transversal part, which in the case of far field is equivalent of the P or S wave,
+<span class="math notranslate nohighlight">\(u \left(r, t \right)\)</span> is the displacement,
+<span class="math notranslate nohighlight">\(R^{F*}\)</span> is the radiation of radial or transversal near field pattern,
+<span class="math notranslate nohighlight">\(r\)</span> is the hypocentral distance, <span class="math notranslate nohighlight">\(\rho\)</span> is the density at the source,
+<span class="math notranslate nohighlight">\(v\)</span> is the P or S velocity,
+<span class="math notranslate nohighlight">\(\dot{M}\left( t \right)\)</span> is the time derivative of source time function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source_model</strong> – The source model object.</p></li>
+<li><p><strong>distance</strong> – The hypocentral distance</p></li>
+<li><p><strong>vp</strong> – The P wave velocity.</p></li>
+<li><p><strong>vs</strong> – The S wave velocity.</p></li>
+<li><p><strong>times</strong> – Time samples. The samples steps must equal dt.</p></li>
+<li><p><strong>phase</strong> – The phase name: ‘P’ or ‘S’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The radial and transversal displacement in the near field</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="green_functions.HomogeneousGreenFunction.intermediate">
+<span class="sig-name descname"><span class="pre">intermediate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">times</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'P'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/green_functions.html#HomogeneousGreenFunction.intermediate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#green_functions.HomogeneousGreenFunction.intermediate" title="Link to this definition"></a></dt>
+<dd><p>Compute the intermediate part of the displacement
+of the Green function in the homogeneous and isotropic medium.</p>
+<div class="math notranslate nohighlight">
+\[u_* \left(r, t \right) = \frac{R^{I*}}{4\pi\rho v^2 r^2} M\left( t \right),\]</div>
+<p>where :math * means radial or transversal part,
+<span class="math notranslate nohighlight">\(u \left(r, t \right)\)</span> is the displacement,
+<span class="math notranslate nohighlight">\(R^{I*}\)</span> is the radiation of radial or transversal near field pattern,
+<span class="math notranslate nohighlight">\(r\)</span> is the hypocentral distance, <span class="math notranslate nohighlight">\(\rho\)</span> is the density at the source,
+<span class="math notranslate nohighlight">\(v\)</span> is the P or S velocity,
+<span class="math notranslate nohighlight">\(M\left( t \right)\)</span> is the source time function.
+For P wave <span class="math notranslate nohighlight">\(R^{IR}= 4R^{FR}\)</span> and <span class="math notranslate nohighlight">\(R^{IT}= -2R^{FT}\)</span> (see far field radiation),
+for S wave <span class="math notranslate nohighlight">\(R^{IR}= -3R^{FR}\)</span> and <span class="math notranslate nohighlight">\(R^{IT}= 3R^{FT}\)</span> (see far field radiation).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source_model</strong> – The source model object.</p></li>
+<li><p><strong>distance</strong> – The hypocentral distance</p></li>
+<li><p><strong>vp</strong> – The P wave velocity.</p></li>
+<li><p><strong>vs</strong> – The S wave velocity.</p></li>
+<li><p><strong>times</strong> – Time samples. The samples steps must equal dt</p></li>
+<li><p><strong>phase</strong> – The phase name: ‘P’ or ‘S’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The radial and transversal displacement in the near field</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="green_functions.HomogeneousGreenFunction.near">
+<span class="sig-name descname"><span class="pre">near</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">times</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/green_functions.html#HomogeneousGreenFunction.near"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#green_functions.HomogeneousGreenFunction.near" title="Link to this definition"></a></dt>
+<dd><p>Compute the near part of the displacement
+of the Green function in the homogeneous and isotropic medium.</p>
+<div class="math notranslate nohighlight">
+\[u_* \left(r, t \right) = \frac{R^{N*}}{4\pi\rho r^4}\int_{r/v_p}^{r/v_s}\tau M\left( t-\tau \right)d\tau,\]</div>
+<p>where * means radial or transversal part, <span class="math notranslate nohighlight">\(u \left(r, t \right)\)</span> is the displacement,
+<span class="math notranslate nohighlight">\(R^{N*}\)</span> is the radiation of radial or transversal near field pattern
+<span class="math notranslate nohighlight">\(R^{NR}= 9R^{FR}\)</span> and <span class="math notranslate nohighlight">\(R^{NT}= -6R^{FT}\)</span> (see far field radiation),
+<span class="math notranslate nohighlight">\(r\)</span> is the hypocentral distance, <span class="math notranslate nohighlight">\(\rho\)</span> is the density at the source,
+<span class="math notranslate nohighlight">\(v_p\)</span> and <span class="math notranslate nohighlight">\(v_s\)</span> are P and S velocities at the source,
+<span class="math notranslate nohighlight">\(M\left( t \right)\)</span> is the source time function.
+The integration is realised by the convolution of the source time function nad the signal
+<span class="math notranslate nohighlight">\(t(H(t-r/v_p) - H(t-r/v_s))\)</span>, where <span class="math notranslate nohighlight">\(H(t)\)</span> is Heaviside step function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source_model</strong> – The source model object.</p></li>
+<li><p><strong>distance</strong> – The hypocentral distance</p></li>
+<li><p><strong>vp</strong> – The P wave velocity.</p></li>
+<li><p><strong>vs</strong> – The S wave velocity.</p></li>
+<li><p><strong>times</strong> – Time samples. The samples steps must equal dt</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The radial and transversal displacement in the near field</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="api_run.html" class="btn btn-neutral float-left" title="3.1. Executable modules" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bibliography.html" class="btn btn-neutral float-right" title="4. References" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Jan Wiszniowski.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

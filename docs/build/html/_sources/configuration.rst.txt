@@ -1,0 +1,64 @@
+.. _configuration:
+
+Configuration
+#############
+
+The configuration is kept in the Python dictionary,
+where keys are case-sensitive strings and values depend on parameters.
+They can be strings, float values, integer values, boolean values, sub-dictionaries, or lists.
+
+The configuration file (example name: ``config.json``) is a file in JavaScript Object Notation (JSON)
+Here is the example file::
+
+    {
+      "source_model": "Haskell",
+      "green_function": "homogeneous",
+      "dt": 0.001,
+      "density": 2700,
+      "radial_radiation": 1.0,
+      "vp": 5000.0,
+      "vs": 2900.0,
+      "stop_simulation": "rapture_time",
+      "source_parameters": [
+        {"moment_scalar": 1e14, "rapture_time": 0.05},
+        {"moment_scalar": 1e15, "rapture_time": 0.1},
+        {"moment_scalar": 1e16, "rapture_time": 0.3}
+      ],
+      "distances": [500, 1000, 2000, 5000, 10000, 20000]
+
+    }
+
+
+Configuration parameters
+========================
+
+Below is the description of parameters.
+
+:source_model: (str) The source model name.
+    Two values are allowed "Haskell", or "Brune"
+:green_function:  (str) The Green function type  name.
+    So far only "homogeneous" is allowed.
+:dt: (float) The time sampling step for calculations
+:density: (float) The density at the source [kg/m^3]
+:radial_radiation: (float) The radial radiation absolute value in the far field. 
+:transversal_radiation: (float) The transversal radiation absolute value in the far field.
+    This parameter is not used so far in the assessment.
+    Together with the radial_radiation, using both parameters required correct calculations
+    according  :cite:`AkiRichards2002` page 79 or  :cite:`GibowiczKijko1994` page 192.
+:vp: (float) The P wave velocity [m/s].
+:vs: (float) The S wave velocity [m/s].
+:stop_simulation: (str) The information when stop simulation and signal visualization.
+    There are two possibilities: "rapture_time" stop simulation at phase S time arrival
+    + the rapture time + 0.5 s, whereas "phase_time" stop simulation at phase S time arrival.
+:source_parameters: (list) The list of source parameters, that figures are plotted
+    See :ref:`Source parameters description`.
+:moment_scalar: 1e14, :rapture_time: 0.05},
+:distances: (list) The list of distances at whoch displacements plotted are plotted in each figure.
+
+Source parameters description
+=============================
+The source parameters are dictionary of two items required to calculate the source.
+
+:moment_scalar: (float) The moment scalar of the DC seismic moment - :math:`M_0`.
+:rapture_time: (float) The rapture time in the case of Haskell model.
+    In other models it is the time parameters of the model.
